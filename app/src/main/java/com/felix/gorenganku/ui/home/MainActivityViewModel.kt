@@ -14,8 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private val _dataFavorite = MutableLiveData<Resource<List<GetFeedsListResponse>>>()
-    val dataFavorite: LiveData<Resource<List<GetFeedsListResponse>>> get() = _dataFavorite
+    private val _dataFavorite = MutableLiveData<Resource<List<GetFeedsListResponse.Feed.Content.Details>>>()
+    val dataFavorite: LiveData<Resource<List<GetFeedsListResponse.Feed.Content.Details>>> get() = _dataFavorite
 
     fun getAllFavorite(){
         viewModelScope.launch {

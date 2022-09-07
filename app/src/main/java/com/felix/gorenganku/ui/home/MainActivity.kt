@@ -17,7 +17,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var progressDialog: ProgressDialog
-    private lateinit var adapter: FavoriteAdapter
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
@@ -43,6 +42,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                             startActivity(intent)
                         }
                     })
+                    adapter.submitData(resource?.data)
                     binding.rvFavorite.adapter = adapter
                 }
                 Status.LOADING -> {
