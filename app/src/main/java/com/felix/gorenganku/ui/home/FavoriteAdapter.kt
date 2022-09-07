@@ -20,7 +20,7 @@ class FavoriteAdapter (private val onItemClick: OnClickListener) : RecyclerView.
         override fun areContentsTheSame(
             oldItem: GetFeedsListResponse.Feed.Content.Details,
             newItem: GetFeedsListResponse.Feed.Content.Details):
-                Boolean = oldItem == newItem
+                Boolean = oldItem.hashCode() == newItem.hashCode()
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)

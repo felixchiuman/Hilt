@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.felix.gorenganku.data.api.model.list.GetFeedsListResponse
 import com.felix.gorenganku.databinding.ActivityMainBinding
@@ -35,8 +36,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         progressDialog = ProgressDialog(this)
         binding.rvFavorite.adapter = adapter
-        setupObservers()
         viewModel.getAllFavorite()
+        setupObservers()
     }
 
     private fun setupObservers() {
