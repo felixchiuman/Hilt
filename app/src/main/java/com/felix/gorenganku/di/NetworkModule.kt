@@ -52,23 +52,25 @@ object NetworkModule {
     @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        chuckerInterceptor: ChuckerInterceptor
+        chuckerInterceptor: ChuckerInterceptor,
+        headerInterceptor: Interceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor{chain ->
-                val original = chain.request()
-                val url = original.url.newBuilder()
-//                    .addQueryParameter("X-RapidAPI-Key", apiKey)
-//                    .addQueryParameter("X-RapidAPI-Host", "yummly2.p.rapidapi.com")
-                    .addQueryParameter("limit","24")
-                    .addQueryParameter("start","0")
-                    .build()
-
-                val request = original.newBuilder()
-                    .url(url)
-                    .build()
-                chain.proceed(request)
-            }
+            .addInterceptor(headerInterceptor)
+//            .addInterceptor{chain ->
+//                val original = chain.request()
+//                val url = original.url.newBuilder()
+////                    .addQueryParameter("X-RapidAPI-Key", apiKey)
+////                    .addQueryParameter("X-RapidAPI-Host", "yummly2.p.rapidapi.com")
+//                    .addQueryParameter("limit","24")
+//                    .addQueryParameter("start","0")
+//                    .build()
+//
+//                val request = original.newBuilder()
+//                    .url(url)
+//                    .build()
+//                chain.proceed(request)
+//            }
             .addInterceptor(loggingInterceptor)
             .addInterceptor(chuckerInterceptor)
             .build()
