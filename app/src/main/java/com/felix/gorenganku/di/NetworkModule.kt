@@ -3,6 +3,7 @@ package com.felix.gorenganku.di
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.felix.gorenganku.BuildConfig
 import com.felix.gorenganku.data.api.service.ApiHelper
 import com.felix.gorenganku.data.api.service.ApiService
 import dagger.Module
@@ -20,6 +21,7 @@ import retrofit2.create
 import javax.inject.Singleton
 
 private const val BASE_URL = "https://yummly2.p.rapidapi.com/"
+private val apiKey = BuildConfig.API_KEY
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -53,6 +55,20 @@ object NetworkModule {
         chuckerInterceptor: ChuckerInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor{chain ->
+                val original = chain.request()
+                val url = original.url.newBuilder()
+//                    .addQueryParameter("X-RapidAPI-Key", apiKey)
+//                    .addQueryParameter("X-RapidAPI-Host", "yummly2.p.rapidapi.com")
+                    .addQueryParameter("limit","24")
+                    .addQueryParameter("start","0")
+                    .build()
+
+                val request = original.newBuilder()
+                    .url(url)
+                    .build()
+                chain.proceed(request)
+            }
             .addInterceptor(loggingInterceptor)
             .addInterceptor(chuckerInterceptor)
             .build()
@@ -75,10 +91,9 @@ object NetworkModule {
     fun getInterceptor(): Interceptor {
         return Interceptor {
             val request = it.request().newBuilder()
-                .addHeader("x-rapidapi-key", "67151d4837msh32c417dc9eb7c42p1c1fdfjsn739cdce8a685")
-                .addHeader("x-rapidapi-host", "yummly2.p.rapidapi.com")
-                .build()
-            it.proceed(request)
+                request.addHeader("X-RapidAPI-Key", apiKey)
+                request.addHeader("X-RapidAPI-Host", "yummly2.p.rapidapi.com")
+            it.proceed(request.build())
         }
     }
 
