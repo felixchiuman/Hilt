@@ -42,7 +42,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                             startActivity(intent)
                         }
                     })
-                    adapter.submitData(resource?.data)
+                    adapter.submitData(resource.data)
                     binding.rvFavorite.adapter = adapter
                 }
                 Status.LOADING -> {

@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("feeds/list?limit=24&start=0")
-    suspend fun getList(): GetFeedsListResponse
+    suspend fun getList(): List<GetFeedsListResponse>
 }
