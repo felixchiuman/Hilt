@@ -26,8 +26,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
 
         adapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener{
-            override fun onClickItem(data: GetFeedsListResponse.Feed.Content.Details) {
-                var id = data.id
+            override fun onClickItem(data: GetFeedsListResponse.Feed) {
+                val id = data.content.details?.id
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                 intent.putExtra("id",id)
                 startActivity(intent)
@@ -36,8 +36,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         progressDialog = ProgressDialog(this)
         binding.rvFavorite.adapter = adapter
-        viewModel.getAllFavorite()
         setupObservers()
+        viewModel.getAllFavorite()
     }
 
     private fun setupObservers() {
@@ -46,14 +46,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
                     progressDialog.dismiss()
-                    adapter.submitData(resource.data)
+                    adapter.submitData(resource.data?.body()?.feed)
                 }
                 Status.LOADING -> {
                     Log.d("Status","Loading")
                     progressDialog.show()
                 }
                 Status.ERROR -> {
-                    Log.d("Status","Error")
+                    Log.d("Status","Error ${resource.message}")
                     progressDialog.dismiss()
                 }
             }

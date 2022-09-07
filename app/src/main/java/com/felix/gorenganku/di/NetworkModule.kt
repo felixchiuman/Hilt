@@ -73,9 +73,9 @@ object NetworkModule {
 //            }
             .addInterceptor(loggingInterceptor)
             .addInterceptor(chuckerInterceptor)
-            .connectTimeout(10000, TimeUnit.MILLISECONDS)
-            .readTimeout(10000, TimeUnit.MILLISECONDS)
-            .writeTimeout(10000, TimeUnit.MILLISECONDS)
+            .connectTimeout(60000, TimeUnit.MILLISECONDS)
+            .readTimeout(60000, TimeUnit.MILLISECONDS)
+            .writeTimeout(60000, TimeUnit.MILLISECONDS)
             .build()
     }
 

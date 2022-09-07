@@ -11,21 +11,21 @@ import com.felix.gorenganku.databinding.FavoriteContentBinding
 
 class FavoriteAdapter (private val onItemClick: OnClickListener) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
-    private val diffCallback = object : DiffUtil.ItemCallback<GetFeedsListResponse.Feed.Content.Details>() {
+    private val diffCallback = object : DiffUtil.ItemCallback<GetFeedsListResponse.Feed>() {
         override fun areItemsTheSame(
-            oldItem: GetFeedsListResponse.Feed.Content.Details,
-            newItem: GetFeedsListResponse.Feed.Content.Details):
-                Boolean = oldItem.id == newItem.id
+            oldItem: GetFeedsListResponse.Feed,
+            newItem: GetFeedsListResponse.Feed):
+                Boolean = oldItem == newItem
 
         override fun areContentsTheSame(
-            oldItem: GetFeedsListResponse.Feed.Content.Details,
-            newItem: GetFeedsListResponse.Feed.Content.Details):
+            oldItem: GetFeedsListResponse.Feed,
+            newItem: GetFeedsListResponse.Feed):
                 Boolean = oldItem.hashCode() == newItem.hashCode()
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun submitData(value: List<GetFeedsListResponse.Feed.Content.Details>?) = differ.submitList(value)
+    fun submitData(value: List<GetFeedsListResponse.Feed>?) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -41,11 +41,11 @@ class FavoriteAdapter (private val onItemClick: OnClickListener) : RecyclerView.
 
     inner class ViewHolder(private val binding: FavoriteContentBinding) :
         RecyclerView.ViewHolder(binding.root){
-        fun bind(data: GetFeedsListResponse.Feed.Content.Details){
+        fun bind(data: GetFeedsListResponse.Feed){
             binding.apply {
-                Glide.with(binding.root).load(data.images?.get(0)?.hostedLargeUrl)
+                Glide.with(binding.root).load(data.content.details?.images?.get(0)?.hostedLargeUrl)
                     .into(binding.ivFood)
-                tvTitle.text = data.displayName
+                tvTitle.text = data.content.details?.displayName
                 root.setOnClickListener {
                     onItemClick.onClickItem(data)
                 }
@@ -54,6 +54,6 @@ class FavoriteAdapter (private val onItemClick: OnClickListener) : RecyclerView.
     }
 
     interface OnClickListener{
-        fun onClickItem(data: GetFeedsListResponse.Feed.Content.Details)
+        fun onClickItem(data: GetFeedsListResponse.Feed)
     }
 }
