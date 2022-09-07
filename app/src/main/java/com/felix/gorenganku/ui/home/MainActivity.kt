@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import com.felix.gorenganku.data.api.service.list.GetFeedsListResponse
+import com.felix.gorenganku.data.api.model.list.GetFeedsListResponse
 import com.felix.gorenganku.databinding.ActivityMainBinding
 import com.felix.gorenganku.resource.Status
 import com.felix.gorenganku.ui.base.BaseActivity
@@ -17,15 +17,26 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var adapter: FavoriteAdapter
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        progressDialog = ProgressDialog(this)
+        adapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener{
+            override fun onClickItem(data: GetFeedsListResponse.Feed.Content.Details) {
+                var id = data.id
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                intent.putExtra("id",id)
+                startActivity(intent)
+            }
+        })
 
+        progressDialog = ProgressDialog(this)
+        binding.rvFavorite.adapter = adapter
         setupObservers()
+        viewModel.getAllFavorite()
     }
 
     private fun setupObservers() {
@@ -34,16 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
                     progressDialog.dismiss()
-                    val adapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener{
-                        override fun onClickItem(data: GetFeedsListResponse.Feed.Content.Details) {
-                            var id = data.id
-                            val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                            intent.putExtra("id",id)
-                            startActivity(intent)
-                        }
-                    })
                     adapter.submitData(resource.data)
-                    binding.rvFavorite.adapter = adapter
                 }
                 Status.LOADING -> {
                     Log.d("Status","Loading")
@@ -55,6 +57,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
             }
         }
-        viewModel.getAllFavorite()
     }
 }

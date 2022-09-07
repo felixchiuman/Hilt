@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.felix.gorenganku.data.api.service.list.GetFeedsListResponse
+import com.felix.gorenganku.data.api.model.list.GetFeedsListResponse
 import com.felix.gorenganku.databinding.FavoriteContentBinding
 
 class FavoriteAdapter (private val onItemClick: OnClickListener) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
