@@ -61,7 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 val image = data.display.images[0]
                 val rating = data.content.details?.rating.toString()
                 val title = data.display.displayName.toString()
-                val description = data.content.description.toString()
+                val description = data.seo?.web?.metaTags?.description
                 val ingredient = data.content.ingredientLines?.map {
                     it.ingredient
                 }
