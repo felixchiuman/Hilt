@@ -1,15 +1,19 @@
 package com.felix.gorenganku.ui.home
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.felix.gorenganku.R
 import com.felix.gorenganku.data.api.model.category.GetCategoryListResponse
 import com.felix.gorenganku.databinding.CategoryContentBinding
 
 class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+
+    var rowIndex = -1
 
     private val diffCallback = object : DiffUtil.ItemCallback<GetCategoryListResponse.BrowseCategory>() {
         override fun areItemsTheSame(
@@ -46,6 +50,16 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>()
                 Glide.with(binding.root).load(data.display.iconImage)
                     .into(binding.ivCategory)
                 tvTitle.text = data.display.displayName
+                categoryCard.setOnClickListener({
+                    rowIndex = position
+                    notifyDataSetChanged()
+                })
+
+                if (rowIndex === position) {
+                    categoryCard.setBackgroundResource(R.drawable.selected_card)
+                } else {
+                    categoryCard.setBackgroundResource(R.drawable.unselected_card)
+                }
             }
         }
     }
