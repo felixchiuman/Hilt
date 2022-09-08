@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:text="Hello Felix,"
         android:textSize="18sp"
-        android:textFontWeight="600"
+        android:fontFamily="@font/poppins_bold"
         android:layout_marginStart="21dp"
         android:layout_marginTop="16dp" />
 
@@ -26,6 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_hello"
         android:text="Selamat Datang!"
+        android:fontFamily="@font/poppins_bold"
         android:textSize="18sp"
         android:textFontWeight="600"
         android:layout_marginStart="21dp" />
