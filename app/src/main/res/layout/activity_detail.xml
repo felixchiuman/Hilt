@@ -137,78 +137,13 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_summary"/>
 
             <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_ingredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_ingridients"
                 style="@style/Widget.MaterialComponents.Chip.Entry"
                 android:layout_marginHorizontal="21dp"
                 android:layout_marginVertical="12dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Msg"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Gula"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Garam"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Merica"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Tepung Terigu"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Tepung Tapioka"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
             </com.google.android.material.chip.ChipGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

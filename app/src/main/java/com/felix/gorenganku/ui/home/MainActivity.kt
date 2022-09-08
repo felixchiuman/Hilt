@@ -34,12 +34,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 val rating = data.content.details?.rating.toString()
                 val title = data.display.displayName
                 val description = data.display.description.toString()
-                val ingredients = data.content.ingredientLines?.get(0)?.ingredient
-                val ingredientsTwo = data.content.ingredientLines?.get(1)?.ingredient
-                val ingredientsThree = data.content.ingredientLines?.get(2)?.ingredient
-                val ingredientsFour = data.content.ingredientLines?.get(3)?.ingredient
-                val ingredientsFive = data.content.ingredientLines?.get(4)?.ingredient
-                val ingredientsSix = data.content.ingredientLines?.get(5)?.ingredient
+                val ingredients = data.content.ingredientLines?.map {
+                    it.ingredient
+                }
+
                 Log.d("TAG", "onClickItem: $ingredients")
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                 val bundle = Bundle()
@@ -55,17 +53,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     bundle.putString("description", description)
                 }
 
-                bundle.putString("ingredients", ingredients)
-
-                bundle.putString("ingredientsTwo", ingredientsTwo)
-
-                bundle.putString("ingredientsThree", ingredientsThree)
-
-                bundle.putString("ingredientsFour", ingredientsFour)
-
-                bundle.putString("ingredientsFive", ingredientsFive)
-
-                bundle.putString("ingredientsSix", ingredientsSix)
+                if (ingredients != null) {
+                    bundle.putStringArrayList("ingredients", ArrayList(ingredients))
+                }
 
                 intent.putExtras(bundle)
                 startActivity(intent)
@@ -78,12 +68,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 val rating = data.content.details?.rating.toString()
                 val title = data.display.displayName
                 val description = data.display.description.toString()
-                val ingredients = data.content.ingredientLines?.get(0)?.ingredient
-                val ingredientsTwo = data.content.ingredientLines?.get(1)?.ingredient
-                val ingredientsThree = data.content.ingredientLines?.get(2)?.ingredient
-                val ingredientsFour = data.content.ingredientLines?.get(3)?.ingredient
-                val ingredientsFive = data.content.ingredientLines?.get(4)?.ingredient
-                val ingredientsSix = data.content.ingredientLines?.get(5)?.ingredient
+                val ingredients = data.content.ingredientLines?.map {
+                    it.ingredient
+                }
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                 val bundle = Bundle()
 
@@ -98,17 +85,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     bundle.putString("description", description)
                 }
 
-                bundle.putString("ingredients", ingredients)
-
-                bundle.putString("ingredientsTwo", ingredientsTwo)
-
-                bundle.putString("ingredientsThree", ingredientsThree)
-
-                bundle.putString("ingredientsFour", ingredientsFour)
-
-                bundle.putString("ingredientsFive", ingredientsFive)
-
-                bundle.putString("ingredientsSix", ingredientsSix)
+                if (ingredients != null) {
+                    bundle.putStringArrayList("ingredients", ArrayList(ingredients))
+                }
 
                 intent.putExtras(bundle)
                 startActivity(intent)

@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.felix.gorenganku.R
@@ -13,22 +15,17 @@ import com.google.android.material.chip.Chip
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
+    val bundle = intent.extras
+    val image = bundle?.getString("image")
+    val rating = bundle?.getString("rating")
+    val title = bundle?.getString("title")
+    val desc = bundle?.getString("description")
+    val ingredient = bundle?.getStringArrayList("ingredients")
+
     override fun getViewBinding() = ActivityDetailBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val bundle = intent.extras
-        val image = bundle?.getString("image")
-        val rating = bundle?.getString("rating")
-        val title = bundle?.getString("title")
-        val desc = bundle?.getString("description")
-        val ingredient = bundle?.getString("ingredients")
-        val ingredientTwo = bundle?.getString("ingredientsTwo")
-        val ingredientThree = bundle?.getString("ingredientsThree")
-        val ingredientFour = bundle?.getString("ingredientsFour")
-        val ingredientFive = bundle?.getString("ingredientsFive")
-        val ingredientSix = bundle?.getString("ingredientsSix")
 
         Log.d("image", "onCreate: $image")
         Log.d("rating", "onCreate: $rating")
@@ -37,64 +34,61 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         Log.d("ingredient", "onCreate: $ingredient")
 
         binding.apply {
-            if (image != null){
+            if (image != null) {
                 Glide.with(root).load(image)
                     .into(ivFood)
-            }else if (image == null){
+            } else if (image == null) {
                 ivFood.setImageResource(R.drawable.ic_baseline_broken_image_24)
             }
 
-            if (rating != null){
+            if (rating != null) {
                 tvRating.text = rating
-            }else if (rating == null){
+            } else if (rating == null) {
                 tvRating.text = "-"
             }
 
             if (title != null) {
                 tvTitle.text = title
-            }else if (title == null){
+            } else if (title == null) {
                 tvTitle.text = "-"
             }
 
             if (desc != null) {
                 tvSummary.text = desc
-            }else if (desc == null){
+            } else if (desc == null) {
                 tvSummary.text = "No Description"
-            }
-
-            if (ingredient != null){
-                chip1.text = ingredient
-                chip1.visibility = Chip.VISIBLE
-            }
-
-            if (ingredientTwo != null){
-                chip2.text = ingredientTwo
-                chip2.visibility = Chip.VISIBLE
-            }
-
-            if (ingredientThree != null){
-                chip3.text = ingredientThree
-                chip3.visibility = Chip.VISIBLE
-            }
-
-            if (ingredientFour != null){
-                chip4.text = ingredientFour
-                chip4.visibility = Chip.VISIBLE
-            }
-
-            if (ingredientFive != null){
-                chip5.text = ingredientFive
-                chip5.visibility = Chip.VISIBLE
-            }
-
-            if (ingredientSix != null){
-                chip6.text = ingredientSix
-                chip6.visibility = Chip.VISIBLE
             }
 
             ivBack.setOnClickListener {
                 onBackPressed()
             }
         }
+        entryChip()
     }
+
+    private fun createMyChips(txt: String) {
+        val chip = Chip(this)
+        chip.apply {
+            text = txt
+            chipIcon = ContextCompat.getDrawable(
+                this@DetailActivity,
+                R.drawable.ic_launcher_background)
+            isChipIconVisible = false
+            isCloseIconVisible = true
+            isClickable = true
+            isCheckable = false
+            binding.cgIngredients.addView(chip as View)
+            setOnCloseIconClickListener {
+                binding.cgIngredients.removeView(chip as View)
+            }
+        }
+    }
+
+    private fun entryChip() {
+            if (ingredient != null) {
+                for (i in ingredient.indices) {
+                    createMyChips(ingredient[i])
+                }
+            }
+        }
 }

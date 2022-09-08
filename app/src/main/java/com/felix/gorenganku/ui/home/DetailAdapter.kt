@@ -43,8 +43,10 @@ class DetailAdapter (private val onItemClick: OnClickListener) : RecyclerView.Ad
         RecyclerView.ViewHolder(binding.root){
         fun bind(data: GetFeedsListResponse.Feed){
             binding.apply {
-                Glide.with(binding.root).load(data.display.images[0])
-                    .into(binding.ivFood)
+                if (data.display.images.isNotEmpty()){
+                    Glide.with(binding.root).load(data.display.images[0])
+                        .into(binding.ivFood)
+                }
                 tvTitle.text = data.display.displayName
                 ratingBar.rating = data.content.details?.rating?.toFloat() ?: 0f
                 root.setOnClickListener {
