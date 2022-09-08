@@ -70,9 +70,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         val chip = Chip(this)
         chip.apply {
             text = txt
-            chipIcon = ContextCompat.getDrawable(
-                this@DetailActivity,
-                R.drawable.ic_launcher_background)
             isChipIconVisible = false
             isCloseIconVisible = true
             isClickable = true
