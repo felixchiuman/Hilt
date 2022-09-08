@@ -30,23 +30,92 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         favoriteAdapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener{
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
-                val id = data.content.details?.id
+                val image = data.display.images[0]
+                val rating = data.content.details?.rating.toString()
+                val title = data.display.displayName
+                val description = data.display.description.toString()
+                val ingredients = data.content.ingredientLines?.get(0)?.ingredient
+                val ingredientsTwo = data.content.ingredientLines?.get(1)?.ingredient
+                val ingredientsThree = data.content.ingredientLines?.get(2)?.ingredient
+                val ingredientsFour = data.content.ingredientLines?.get(3)?.ingredient
+                val ingredientsFive = data.content.ingredientLines?.get(4)?.ingredient
+                val ingredientsSix = data.content.ingredientLines?.get(5)?.ingredient
+                Log.d("TAG", "onClickItem: $ingredients")
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                intent.putExtra("id",id)
+                val bundle = Bundle()
+
+                bundle.putString("image", image)
+                if (rating != "null") {
+                    bundle.putString("rating", rating)
+                }
+                if (title != null) {
+                    bundle.putString("title", title)
+                }
+                if (description != "null") {
+                    bundle.putString("description", description)
+                }
+
+                bundle.putString("ingredients", ingredients)
+
+                bundle.putString("ingredientsTwo", ingredientsTwo)
+
+                bundle.putString("ingredientsThree", ingredientsThree)
+
+                bundle.putString("ingredientsFour", ingredientsFour)
+
+                bundle.putString("ingredientsFive", ingredientsFive)
+
+                bundle.putString("ingredientsSix", ingredientsSix)
+
+                intent.putExtras(bundle)
                 startActivity(intent)
             }
         })
 
         detailAdapter = DetailAdapter(object : DetailAdapter.OnClickListener{
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
-                val id = data.content.details?.id
+                val image = data.display.images[0]
+                val rating = data.content.details?.rating.toString()
+                val title = data.display.displayName
+                val description = data.display.description.toString()
+                val ingredients = data.content.ingredientLines?.get(0)?.ingredient
+                val ingredientsTwo = data.content.ingredientLines?.get(1)?.ingredient
+                val ingredientsThree = data.content.ingredientLines?.get(2)?.ingredient
+                val ingredientsFour = data.content.ingredientLines?.get(3)?.ingredient
+                val ingredientsFive = data.content.ingredientLines?.get(4)?.ingredient
+                val ingredientsSix = data.content.ingredientLines?.get(5)?.ingredient
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                intent.putExtra("id",id)
+                val bundle = Bundle()
+
+                bundle.putString("image", image)
+                if (rating != "null") {
+                    bundle.putString("rating", rating)
+                }
+                if (title != null) {
+                    bundle.putString("title", title)
+                }
+                if (description != "null") {
+                    bundle.putString("description", description)
+                }
+
+                bundle.putString("ingredients", ingredients)
+
+                bundle.putString("ingredientsTwo", ingredientsTwo)
+
+                bundle.putString("ingredientsThree", ingredientsThree)
+
+                bundle.putString("ingredientsFour", ingredientsFour)
+
+                bundle.putString("ingredientsFive", ingredientsFive)
+
+                bundle.putString("ingredientsSix", ingredientsSix)
+
+                intent.putExtras(bundle)
                 startActivity(intent)
             }
         })
 
-        categoriesAdapter = CategoriesAdapter(mutableListOf())
+        categoriesAdapter = CategoriesAdapter()
 
         progressDialog = ProgressDialog(this)
         binding.rvFavorite.adapter = favoriteAdapter

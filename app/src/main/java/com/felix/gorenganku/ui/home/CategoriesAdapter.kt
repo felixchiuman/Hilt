@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.felix.gorenganku.data.api.model.category.GetCategoryListResponse
 import com.felix.gorenganku.databinding.CategoryContentBinding
 
-class CategoriesAdapter(mutableListOf: MutableList<Any>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<GetCategoryListResponse.BrowseCategory>() {
         override fun areItemsTheSame(
