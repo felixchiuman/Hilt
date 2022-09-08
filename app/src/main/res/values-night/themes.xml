@@ -25,6 +25,10 @@
     </style>
     <style name="ShapeAppearanceOverlay.CardView" parent="">
         <item name="cornerFamilyBottomLeft">rounded</item>
-        <item name="cornerSizeBottomLeft">20%</item>
+        <item name="cornerSizeBottomLeft">8%</item>
+    </style>
+    <style name="ChipTextStyle_Selected">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

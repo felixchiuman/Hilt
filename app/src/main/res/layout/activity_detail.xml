@@ -51,165 +51,106 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CardView">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:cardCornerRadius="30dp"
-                android:backgroundTint="@color/third"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="35dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_star_24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginVertical="12dp"
-                        android:layout_marginStart="22dp"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/tv_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="-"
-                        android:fontFamily="@font/poppins_semi_bold"
-                        android:layout_gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="30sp"
-                        android:layout_marginStart="10sp"
-                        android:layout_marginEnd="22sp"
-                        app:layout_constraintStart_toEndOf="@id/iv_rating"
-                        app:layout_constraintTop_toTopOf="@id/iv_rating"
-                        app:layout_constraintBottom_toBottomOf="@id/iv_rating"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                tools:text="-"
-                android:fontFamily="@font/poppins_bold"
-                android:textSize="25sp"
-                android:layout_marginHorizontal="21dp"
-                android:layout_marginTop="35dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cv_rating"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-            <TextView
-                android:id="@+id/tv_summary"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="No Description"
-                android:textSize="15sp"
-                android:textFontWeight="600"
-                android:textColor="@color/light_grey"
-                android:layout_marginStart="21sp"
-                android:layout_marginEnd="46sp"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_ingridients"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ingredients"
-                android:fontFamily="@font/poppins_bold"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_summary"/>
-
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/tv_ingridients"
-                style="@style/Widget.MaterialComponents.Chip.Entry"
-                android:layout_marginHorizontal="21dp"
-                android:layout_marginVertical="12dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_1"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Msg"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:cardCornerRadius="30dp"
+                    android:backgroundTint="@color/third"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="35dp">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_star_24"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginVertical="12dp"
+                            android:layout_marginStart="22dp"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="-"
+                            android:fontFamily="@font/poppins_semi_bold"
+                            android:layout_gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="30sp"
+                            android:layout_marginStart="10sp"
+                            android:layout_marginEnd="22sp"
+                            app:layout_constraintStart_toEndOf="@id/iv_rating"
+                            app:layout_constraintTop_toTopOf="@id/iv_rating"
+                            app:layout_constraintBottom_toBottomOf="@id/iv_rating"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="-"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="25sp"
+                    android:layout_marginHorizontal="21dp"
+                    android:layout_marginTop="35dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cv_rating"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="No Description"
+                    android:textSize="15sp"
+                    android:textFontWeight="600"
+                    android:textColor="@color/light_grey"
+                    android:layout_marginStart="21sp"
+                    android:layout_marginEnd="46sp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+
+                <TextView
+                    android:id="@+id/tv_ingridients"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Gula"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
+                    android:text="Ingredients"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_summary"/>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_3"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_ingridients"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Garam"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
+                    app:layout_constraintTop_toBottomOf="@id/tv_ingridients"
+                    style="@style/Widget.MaterialComponents.Chip.Entry"
+                    android:layout_marginHorizontal="21dp"
+                    android:layout_marginVertical="12dp">
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Merica"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Tepung Terigu"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Tepung Tapioka"
-                    android:textColor="@color/white"
-                    app:chipCornerRadius="10dp"
-                    android:backgroundTint="@color/secondary"
-                    android:paddingHorizontal="14dp"
-                    android:visibility="gone"/>
-            </com.google.android.material.chip.ChipGroup>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.chip.ChipGroup>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

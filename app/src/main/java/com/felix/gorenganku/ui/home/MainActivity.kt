@@ -23,6 +23,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var detailAdapter: DetailAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
 
+    companion object{
+        const val OBJECT_PARCELABLE = "PARCELABLE"
+    }
+
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,42 +36,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
                 val image = data.display.images[0]
                 val rating = data.content.details?.rating.toString()
-                val title = data.display.displayName
-                val description = data.display.description.toString()
-                val ingredients = data.content.ingredientLines?.get(0)?.ingredient
-                val ingredientsTwo = data.content.ingredientLines?.get(1)?.ingredient
-                val ingredientsThree = data.content.ingredientLines?.get(2)?.ingredient
-                val ingredientsFour = data.content.ingredientLines?.get(3)?.ingredient
-                val ingredientsFive = data.content.ingredientLines?.get(4)?.ingredient
-                val ingredientsSix = data.content.ingredientLines?.get(5)?.ingredient
-                Log.d("TAG", "onClickItem: $ingredients")
-                val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                val bundle = Bundle()
-
-                bundle.putString("image", image)
-                if (rating != "null") {
-                    bundle.putString("rating", rating)
-                }
-                if (title != null) {
-                    bundle.putString("title", title)
-                }
-                if (description != "null") {
-                    bundle.putString("description", description)
+                val title = data.display.displayName.toString()
+                val description = data.seo?.web?.metaTags?.description
+                val ingredient = data.content.ingredientLines?.map {
+                    it.ingredient
                 }
 
-                bundle.putString("ingredients", ingredients)
+                val main = MainParcelable(
+                    image,
+                    rating,
+                    title,
+                    description,
+                    ingredient)
 
-                bundle.putString("ingredientsTwo", ingredientsTwo)
-
-                bundle.putString("ingredientsThree", ingredientsThree)
-
-                bundle.putString("ingredientsFour", ingredientsFour)
-
-                bundle.putString("ingredientsFive", ingredientsFive)
-
-                bundle.putString("ingredientsSix", ingredientsSix)
-
-                intent.putExtras(bundle)
+                val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+                    putExtra(OBJECT_PARCELABLE, main)
+                }
                 startActivity(intent)
             }
         })
@@ -76,41 +60,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
                 val image = data.display.images[0]
                 val rating = data.content.details?.rating.toString()
-                val title = data.display.displayName
-                val description = data.display.description.toString()
-                val ingredients = data.content.ingredientLines?.get(0)?.ingredient
-                val ingredientsTwo = data.content.ingredientLines?.get(1)?.ingredient
-                val ingredientsThree = data.content.ingredientLines?.get(2)?.ingredient
-                val ingredientsFour = data.content.ingredientLines?.get(3)?.ingredient
-                val ingredientsFive = data.content.ingredientLines?.get(4)?.ingredient
-                val ingredientsSix = data.content.ingredientLines?.get(5)?.ingredient
-                val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                val bundle = Bundle()
-
-                bundle.putString("image", image)
-                if (rating != "null") {
-                    bundle.putString("rating", rating)
-                }
-                if (title != null) {
-                    bundle.putString("title", title)
-                }
-                if (description != "null") {
-                    bundle.putString("description", description)
+                val title = data.display.displayName.toString()
+                val description = data.content.description.toString()
+                val ingredient = data.content.ingredientLines?.map {
+                    it.ingredient
                 }
 
-                bundle.putString("ingredients", ingredients)
+                val main = MainParcelable(
+                    image,
+                    rating,
+                    title,
+                    description,
+                    ingredient)
 
-                bundle.putString("ingredientsTwo", ingredientsTwo)
-
-                bundle.putString("ingredientsThree", ingredientsThree)
-
-                bundle.putString("ingredientsFour", ingredientsFour)
-
-                bundle.putString("ingredientsFive", ingredientsFive)
-
-                bundle.putString("ingredientsSix", ingredientsSix)
-
-                intent.putExtras(bundle)
+                val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+                    putExtra(OBJECT_PARCELABLE, main)
+                }
                 startActivity(intent)
             }
         })
