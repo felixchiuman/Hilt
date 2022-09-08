@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.felix.gorenganku.data.api.model.list.GetFeedsListResponse
 import com.felix.gorenganku.databinding.ActivityMainBinding
@@ -20,6 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var progressDialog: ProgressDialog
     private lateinit var favoriteAdapter: FavoriteAdapter
     private lateinit var detailAdapter: DetailAdapter
+    private lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
@@ -44,12 +46,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         })
 
+        categoriesAdapter = CategoriesAdapter(mutableListOf())
+
         progressDialog = ProgressDialog(this)
         binding.rvFavorite.adapter = favoriteAdapter
         binding.rvShowDetail.adapter = detailAdapter
+        binding.rvCategory.adapter = categoriesAdapter
         setupObservers()
         viewModel.getAllFavorite()
         viewModel.getAllDetail()
+        viewModel.getAllCategory()
     }
 
     private fun setupObservers() {
@@ -70,6 +76,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
                 Status.ERROR -> {
                     Log.d("Status","Error ${resource.message}")
+                    Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
                     progressDialog.dismiss()
                 }
             }
@@ -79,16 +86,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             when(resource.status){
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
-                    progressDialog.dismiss()
                     detailAdapter.submitData(resource.data?.body()?.feed)
                 }
                 Status.LOADING -> {
                     Log.d("Status","Loading")
-                    progressDialog.show()
                 }
                 Status.ERROR -> {
                     Log.d("Status","Error ${resource.message}")
-                    progressDialog.dismiss()
+                    Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        viewModel.categories.observe(this){resource ->
+            when(resource.status){
+                Status.SUCCESS -> {
+                    Log.d("Status","Success")
+                    categoriesAdapter.submitData(resource.data?.body()?.browseCategories)
+                }
+                Status.LOADING -> {
+                    Log.d("Status","Loading")
+                }
+                Status.ERROR -> {
+                    Log.d("Status","Error ${resource.message}")
+                    Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }

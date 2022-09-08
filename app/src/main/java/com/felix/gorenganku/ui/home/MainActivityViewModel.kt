@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.felix.gorenganku.data.api.model.category.GetCategoryListResponse
 import com.felix.gorenganku.data.api.model.list.GetFeedsListResponse
 import com.felix.gorenganku.data.repository.Repository
 import com.felix.gorenganku.resource.Resource
@@ -39,6 +40,20 @@ class MainActivityViewModel @Inject constructor(private val repository: Reposito
                 _dataDetail.postValue(Resource.success(repository.getListDetail()))
             }catch (e: Exception){
                 _dataDetail.postValue(Resource.error(e.message.toString()))
+            }
+        }
+    }
+
+    private val _categories = MutableLiveData<Resource<Response<GetCategoryListResponse>>>()
+    val categories: LiveData<Resource<Response<GetCategoryListResponse>>> get() = _categories
+
+    fun getAllCategory(){
+        viewModelScope.launch {
+            _categories.postValue(Resource.loading())
+            try {
+                _categories.postValue(Resource.success(repository.getCategories()))
+            }catch (e: Exception){
+                _categories.postValue(Resource.error(e.message.toString()))
             }
         }
     }
