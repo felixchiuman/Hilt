@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.felix.gorenganku.data.api.model.list.GetFeedsListResponse
-import com.felix.gorenganku.databinding.FavoriteContentBinding
+import com.felix.gorenganku.databinding.ShowDetailContentBinding
 
-class FavoriteAdapter (private val onItemClick: OnClickListener) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+class DetailAdapter (private val onItemClick: OnClickListener) : RecyclerView.Adapter<DetailAdapter.ViewHolder>() {
 
     private val diffCallback = object : DiffUtil.ItemCallback<GetFeedsListResponse.Feed>() {
         override fun areItemsTheSame(
@@ -27,19 +27,19 @@ class FavoriteAdapter (private val onItemClick: OnClickListener) : RecyclerView.
 
     fun submitData(value: List<GetFeedsListResponse.Feed>?) = differ.submitList(value)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ViewHolder(FavoriteContentBinding.inflate(inflater, parent,false))
+        return ViewHolder(ShowDetailContentBinding.inflate(inflater, parent,false))
     }
 
-    override fun onBindViewHolder(holder: FavoriteAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DetailAdapter.ViewHolder, position: Int) {
         val data = differ.currentList[position]
         data.let { holder.bind(data) }
     }
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    inner class ViewHolder(private val binding: FavoriteContentBinding) :
+    inner class ViewHolder(private val binding: ShowDetailContentBinding) :
         RecyclerView.ViewHolder(binding.root){
         fun bind(data: GetFeedsListResponse.Feed){
             binding.apply {

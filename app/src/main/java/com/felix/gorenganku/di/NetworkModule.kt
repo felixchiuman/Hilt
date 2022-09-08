@@ -57,20 +57,6 @@ object NetworkModule {
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(headerInterceptor)
-//            .addInterceptor{chain ->
-//                val original = chain.request()
-//                val url = original.url.newBuilder()
-////                    .addQueryParameter("X-RapidAPI-Key", apiKey)
-////                    .addQueryParameter("X-RapidAPI-Host", "yummly2.p.rapidapi.com")
-//                    .addQueryParameter("limit","24")
-//                    .addQueryParameter("start","0")
-//                    .build()
-//
-//                val request = original.newBuilder()
-//                    .url(url)
-//                    .build()
-//                chain.proceed(request)
-//            }
             .addInterceptor(loggingInterceptor)
             .addInterceptor(chuckerInterceptor)
             .connectTimeout(60000, TimeUnit.MILLISECONDS)

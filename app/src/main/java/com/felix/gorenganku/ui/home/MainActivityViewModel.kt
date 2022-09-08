@@ -28,4 +28,18 @@ class MainActivityViewModel @Inject constructor(private val repository: Reposito
             }
         }
     }
+
+    private val _dataDetail = MutableLiveData<Resource<Response<GetFeedsListResponse>>>()
+    val dataDetail: LiveData<Resource<Response<GetFeedsListResponse>>> get() = _dataDetail
+
+    fun getAllDetail(){
+        viewModelScope.launch {
+            _dataDetail.postValue(Resource.loading())
+            try {
+                _dataDetail.postValue(Resource.success(repository.getListDetail()))
+            }catch (e: Exception){
+                _dataDetail.postValue(Resource.error(e.message.toString()))
+            }
+        }
+    }
 }
