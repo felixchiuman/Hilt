@@ -106,6 +106,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
                 Status.LOADING -> {
                     Log.d("Status","Loading")
+                    progressDialog.setMessage("Loading")
                     progressDialog.show()
                 }
                 Status.ERROR -> {
@@ -121,13 +122,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
                     detailAdapter.submitData(resource.data?.body()?.feed)
+                    progressDialog.dismiss()
                 }
                 Status.LOADING -> {
+                    progressDialog.setMessage("Loading")
+                    progressDialog.show()
                     Log.d("Status","Loading")
                 }
                 Status.ERROR -> {
                     Log.d("Status","Error ${resource.message}")
                     Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 }
             }
         }
@@ -136,13 +141,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
                     categoriesAdapter.submitData(resource.data?.body()?.browseCategories)
+                    progressDialog.dismiss()
                 }
                 Status.LOADING -> {
+                    progressDialog.setMessage("Loading")
+                    progressDialog.show()
                     Log.d("Status","Loading")
                 }
                 Status.ERROR -> {
                     Log.d("Status","Error ${resource.message}")
                     Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
+                    progressDialog.dismiss()
                 }
             }
         }
