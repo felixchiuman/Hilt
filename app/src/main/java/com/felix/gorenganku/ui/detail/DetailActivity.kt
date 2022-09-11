@@ -2,6 +2,7 @@ package com.felix.gorenganku.ui.detail
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import com.bumptech.glide.Glide
 import com.felix.gorenganku.R
 import com.felix.gorenganku.databinding.ActivityDetailBinding
@@ -20,32 +21,33 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         val data = intent.getParcelableExtra<MainParcelable>(MainActivity.OBJECT_PARCELABLE)
 
         binding.apply {
-            if (data?.image != "null") {
-                Glide.with(root).load(data?.image)
+            if (data?.image!!.isNotEmpty()) {
+                Glide.with(root).load(data.image[0])
                     .into(ivFood)
             } else {
-                ivFood.setImageResource(R.drawable.ic_baseline_broken_image_24)
+                Glide.with(root).load("https://cdn2.iconfinder.com/data/icons/basic-ui-set-3-2/64/Basic_ui_3-26-512.png")
+                    .into(ivFood)
             }
 
-            if (data?.rating != "null") {
-                tvRating.text = data?.rating
+            if (data.rating != "null") {
+                tvRating.text = data.rating
             } else {
                 tvRating.text = "-"
             }
 
-            if (data?.title != "null") {
-                tvTitle.text = data?.title
+            if (data.title != "null") {
+                tvTitle.text = data.title
             } else {
                 tvTitle.text = "Title not found"
             }
 
-            if (data?.description != null) {
+            if (data.description != null) {
                 tvSummary.text = data.description
             } else {
                 tvSummary.text = "Description not found"
             }
 
-            Log.d("TAG", "onCreate: ${data?.ingredient}")
+            Log.d("TAG", "onCreate: ${data.ingredient}")
 
 
 

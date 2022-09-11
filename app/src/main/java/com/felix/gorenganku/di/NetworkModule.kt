@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 private const val BASE_URL = "https://yummly2.p.rapidapi.com/"
-private val apiKey = BuildConfig.API_KEY
+private const val apiKey = BuildConfig.API_KEY
 
 @Module
 @InstallIn(SingletonComponent::class)

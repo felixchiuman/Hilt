@@ -1,6 +1,5 @@
 package com.felix.gorenganku.ui.home
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val viewModel: MainActivityViewModel by viewModels()
-    private lateinit var progressDialog: ProgressDialog
     private lateinit var favoriteAdapter: FavoriteAdapter
     private lateinit var detailAdapter: DetailAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
@@ -34,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         favoriteAdapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener{
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
-                val image = data.display.images[0]
+                val image = data.display.images
                 val rating = data.content.details?.rating.toString()
                 val title = data.display.displayName.toString()
                 val description = data.seo?.web?.metaTags?.description
@@ -58,7 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         detailAdapter = DetailAdapter(object : DetailAdapter.OnClickListener{
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
-                val image = data.display.images[0]
+                val image = data.display.images
                 val rating = data.content.details?.rating.toString()
                 val title = data.display.displayName.toString()
                 val description = data.seo?.web?.metaTags?.description
@@ -82,7 +80,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         categoriesAdapter = CategoriesAdapter()
 
-        progressDialog = ProgressDialog(this)
         binding.rvFavorite.adapter = favoriteAdapter
         binding.rvShowDetail.adapter = detailAdapter
         binding.rvCategory.adapter = categoriesAdapter
@@ -97,22 +94,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             when(resource.status){
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
-                    binding.apply {
-                        tvFavorite.visibility = View.VISIBLE
-                        tvShowDetail.visibility = View.VISIBLE
-                    }
-                    progressDialog.dismiss()
+                    binding.pbFavorite.visibility = View.GONE
+                    binding.tvFavorite.visibility = View.VISIBLE
                     favoriteAdapter.submitData(resource.data?.body()?.feed)
                 }
                 Status.LOADING -> {
                     Log.d("Status","Loading")
-                    progressDialog.setMessage("Loading")
-                    progressDialog.show()
                 }
                 Status.ERROR -> {
                     Log.d("Status","Error ${resource.message}")
                     Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
-                    progressDialog.dismiss()
                 }
             }
         }
@@ -122,17 +113,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
                     detailAdapter.submitData(resource.data?.body()?.feed)
-                    progressDialog.dismiss()
+                    binding.pbDetail.visibility = View.GONE
+                    binding.tvShowDetail.visibility = View.VISIBLE
                 }
                 Status.LOADING -> {
-                    progressDialog.setMessage("Loading")
-                    progressDialog.show()
                     Log.d("Status","Loading")
                 }
                 Status.ERROR -> {
                     Log.d("Status","Error ${resource.message}")
                     Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
-                    progressDialog.dismiss()
                 }
             }
         }
@@ -140,18 +129,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             when(resource.status){
                 Status.SUCCESS -> {
                     Log.d("Status","Success")
+                    binding.pbCategory.visibility = View.GONE
                     categoriesAdapter.submitData(resource.data?.body()?.browseCategories)
-                    progressDialog.dismiss()
                 }
                 Status.LOADING -> {
-                    progressDialog.setMessage("Loading")
-                    progressDialog.show()
                     Log.d("Status","Loading")
                 }
                 Status.ERROR -> {
                     Log.d("Status","Error ${resource.message}")
                     Toast.makeText(this, "Error ${resource.message}", Toast.LENGTH_SHORT).show()
-                    progressDialog.dismiss()
+                    binding.pbCategory.visibility = View.GONE
                 }
             }
         }
