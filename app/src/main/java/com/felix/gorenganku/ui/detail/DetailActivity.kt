@@ -2,7 +2,6 @@ package com.felix.gorenganku.ui.detail
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import com.bumptech.glide.Glide
 import com.felix.gorenganku.R
 import com.felix.gorenganku.databinding.ActivityDetailBinding

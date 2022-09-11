@@ -12,7 +12,7 @@ import com.felix.gorenganku.databinding.CategoryContentBinding
 
 class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
-    var rowIndex = -1
+    var rowIndex = 0
 
     private val diffCallback = object : DiffUtil.ItemCallback<GetCategoryListResponse.BrowseCategory>() {
         override fun areItemsTheSame(
