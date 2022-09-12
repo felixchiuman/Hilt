@@ -8,6 +8,7 @@ import com.felix.gorenganku.databinding.ActivityDetailBinding
 import com.felix.gorenganku.ui.base.BaseActivity
 import com.felix.gorenganku.ui.home.MainActivity
 import com.felix.gorenganku.ui.home.MainParcelable
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>() {
@@ -20,6 +21,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
         val data = intent.getParcelableExtra<MainParcelable>(MainActivity.OBJECT_PARCELABLE)
 
         binding.apply {
+            appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                    binding.ivBack.setImageResource(R.drawable.ic_baseline_chevron_left_black_36)
+                } else {
+                    binding.ivBack.setImageResource(R.drawable.ic_baseline_chevron_left_white_36)
+                }
+            })
+
             if (data?.image!!.isNotEmpty()) {
                 Glide.with(root).load(data.image[0])
                     .into(ivFood)

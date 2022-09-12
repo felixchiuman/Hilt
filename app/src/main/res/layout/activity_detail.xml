@@ -47,7 +47,7 @@
                     android:id="@+id/iv_back"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_keyboard_arrow_left"
+                    android:src="@drawable/ic_baseline_chevron_left_white_36"
                     tools:ignore="ContentDescription" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
