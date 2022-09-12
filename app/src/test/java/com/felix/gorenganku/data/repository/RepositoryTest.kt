@@ -14,11 +14,9 @@ import retrofit2.Response
 
 class RepositoryTest {
 
-    //collaborator
+    //variable yg diperlukan
     private lateinit var apiService: ApiService
     private lateinit var apiHelper: ApiHelper
-
-    //system underTest
     private lateinit var repository: Repository
 
     @Before
@@ -29,6 +27,7 @@ class RepositoryTest {
         repository = Repository(apiHelper)
     }
 
+    //sintaks nya untuk mengambil data dari apiHelper
     @Test
     fun getCategory(): Unit = runBlocking {
         val categoryResponse = mockk<Response<GetCategoryListResponse>>()
@@ -38,9 +37,9 @@ class RepositoryTest {
                 apiHelper.getCategories()
             }
         } returns categoryResponse
-
+//system under test
         repository.getCategories()
-
+//then -> apakah data pada var categoryResp sudah cocok dengan helper getcategory
         verify {
             runBlocking {
                 apiHelper.getCategories()

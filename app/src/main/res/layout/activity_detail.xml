@@ -1,198 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
-    <ScrollView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="512dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/iv_food"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:layout_collapseMode="parallax"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/ctr_layout_bg" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_arrow___left_circle"
+                    tools:ignore="ContentDescription" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primary"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_food"
-                android:layout_width="match_parent"
-                android:layout_height="512dp"
-                android:scaleType="fitXY"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic"
-                tools:ignore="ContentDescription" />
-
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
-                android:id="@+id/coordinator"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/iv_food"
-                app:layout_constraintTop_toTopOf="@id/iv_food"
-                android:layout_marginTop="128dp"/>
-
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_detail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toTopOf="@id/coordinator"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CardView">
+                android:id="@+id/cv_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="21dp"
+                android:backgroundTint="@color/third"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cv_rating"
+                    <ImageView
+                        android:id="@+id/iv_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="21dp"
-                        android:layout_marginTop="35dp"
-                        android:backgroundTint="@color/third"
-                        app:cardCornerRadius="30dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:id="@+id/iv_rating"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginVertical="12dp"
-                                android:layout_marginStart="22dp"
-                                android:src="@drawable/ic_baseline_star_24"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:ignore="ContentDescription" />
-
-                            <TextView
-                                android:id="@+id/tv_rating"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10sp"
-                                android:layout_marginEnd="22sp"
-                                android:fontFamily="@font/poppins_semi_bold"
-                                android:textColor="@color/white"
-                                android:textSize="30sp"
-                                app:layout_constraintBottom_toBottomOf="@id/iv_rating"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@id/iv_rating"
-                                app:layout_constraintTop_toTopOf="@id/iv_rating"
-                                tools:text="-" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="21dp"
-                        android:layout_marginTop="35dp"
-                        android:fontFamily="@font/poppins_bold"
-                        android:textSize="25sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/cv_rating"
-                        tools:text="-" />
-
-                    <TextView
-                        android:id="@+id/tv_summary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="21sp"
-                        android:layout_marginEnd="46sp"
-                        android:textColor="@color/light_grey"
-                        android:textSize="15sp"
-                        app:layout_constraintTop_toBottomOf="@id/tv_title"
-                        tools:text="No Description" />
-
-                    <TextView
-                        android:id="@+id/tv_ingridients"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="21dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/poppins_bold"
-                        android:text="@string/ingredients"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_summary" />
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/cg_ingridients"
-                        style="@style/Widget.MaterialComponents.Chip.Entry"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="21dp"
+                        android:layout_gravity="center"
                         android:layout_marginVertical="12dp"
-                        app:layout_constraintTop_toBottomOf="@id/tv_ingridients">
+                        android:layout_marginStart="22dp"
+                        android:src="@drawable/ic_baseline_star_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription" />
 
-                    </com.google.android.material.chip.ChipGroup>
+                    <TextView
+                        android:id="@+id/tv_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginEnd="22sp"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_rating"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_rating"
+                        app:layout_constraintTop_toTopOf="@id/iv_rating"
+                        tools:text="-" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="21dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_rating"
+                tools:text="-" />
+
+            <TextView
+                android:id="@+id/tv_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21sp"
+                android:layout_marginEnd="46sp"
+                android:textColor="@color/light_grey"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                tools:text="No Description" />
+
+            <TextView
+                android:id="@+id/tv_ingridients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/ingredients"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_summary" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_ingridients"
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="21dp"
+                android:layout_marginVertical="12dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_ingridients">
+
+            </com.google.android.material.chip.ChipGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="21dp"
-        android:src="@drawable/ic_baseline_chevron_left_36"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
-    <!--<ImageView
-        android:id="@+id/iv_food"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cl_img"
-        tools:src="@tools:sample/backgrounds/scenic"
-        android:scaleType="fitXY"/>
-
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_chevron_left_36"
-        android:layout_margin="21dp"/>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/cl_img"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/cl_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/cl_img"
-        android:layout_marginTop="256dp"/>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_detail"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@id/cl_card_view"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CardView">
-
-        <ScrollView
+    <!--    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -200,98 +164,137 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cv_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                <ImageView
+                    android:id="@+id/iv_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="512dp"
+                    android:scaleType="fitXY"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:cardCornerRadius="30dp"
-                    android:backgroundTint="@color/third"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginTop="35dp">
+                    tools:src="@tools:sample/backgrounds/scenic"
+                    tools:ignore="ContentDescription" />
+
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:id="@+id/coordinator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_food"
+                    app:layout_constraintTop_toTopOf="@id/iv_food"
+                    android:layout_marginTop="128dp"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="@id/coordinator"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CardView">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/iv_rating"
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_rating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_star_24"
+                            android:layout_marginStart="21dp"
+                            android:layout_marginTop="35dp"
+                            android:backgroundTint="@color/third"
+                            app:cardCornerRadius="30dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginVertical="12dp"
-                            android:layout_marginStart="22dp"
-                            android:layout_gravity="center"/>
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/iv_rating"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginVertical="12dp"
+                                    android:layout_marginStart="22dp"
+                                    android:src="@drawable/ic_baseline_star_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:ignore="ContentDescription" />
+
+                                <TextView
+                                    android:id="@+id/tv_rating"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="10sp"
+                                    android:layout_marginEnd="22sp"
+                                    android:fontFamily="@font/poppins_semi_bold"
+                                    android:textColor="@color/white"
+                                    android:textSize="30sp"
+                                    app:layout_constraintBottom_toBottomOf="@id/iv_rating"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/iv_rating"
+                                    app:layout_constraintTop_toTopOf="@id/iv_rating"
+                                    tools:text="-" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
                         <TextView
-                            android:id="@+id/tv_rating"
+                            android:id="@+id/tv_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="21dp"
+                            android:layout_marginTop="35dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:textSize="25sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cv_rating"
+                            tools:text="-" />
+
+                        <TextView
+                            android:id="@+id/tv_summary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="21sp"
+                            android:layout_marginEnd="46sp"
+                            android:textColor="@color/light_grey"
+                            android:textSize="15sp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_title"
+                            tools:text="No Description" />
+
+                        <TextView
+                            android:id="@+id/tv_ingridients"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:text="-"
-                            android:fontFamily="@font/poppins_semi_bold"
-                            android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            android:textSize="30sp"
-                            android:layout_marginStart="10sp"
-                            android:layout_marginEnd="22sp"
-                            app:layout_constraintStart_toEndOf="@id/iv_rating"
-                            app:layout_constraintTop_toTopOf="@id/iv_rating"
-                            app:layout_constraintBottom_toBottomOf="@id/iv_rating"
-                            app:layout_constraintEnd_toEndOf="parent"/>
+                            android:layout_marginStart="21dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/ingredients"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_summary" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/cg_ingridients"
+                            style="@style/Widget.MaterialComponents.Chip.Entry"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="21dp"
+                            android:layout_marginVertical="12dp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_ingridients">
+
+                        </com.google.android.material.chip.ChipGroup>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    tools:text="-"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textSize="25sp"
-                    android:layout_marginHorizontal="21dp"
-                    android:layout_marginTop="35dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cv_rating"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-                <TextView
-                    android:id="@+id/tv_summary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="No Description"
-                    android:textSize="15sp"
-                    android:textFontWeight="600"
-                    android:textColor="@color/light_grey"
-                    android:layout_marginStart="21sp"
-                    android:layout_marginEnd="46sp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_title"/>
-
-                <TextView
-                    android:id="@+id/tv_ingridients"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ingredients"
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_summary"/>
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/cg_ingridients"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_ingridients"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    android:layout_marginHorizontal="21dp"
-                    android:layout_marginVertical="12dp">
-
-                </com.google.android.material.chip.ChipGroup>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-    </com.google.android.material.card.MaterialCardView>-->
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="21dp"
+            android:src="@drawable/ic_baseline_chevron_left_36"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />-->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
