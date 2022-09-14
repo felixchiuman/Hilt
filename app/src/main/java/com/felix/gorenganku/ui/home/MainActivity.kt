@@ -30,51 +30,37 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        fun navigateDetail(data: GetFeedsListResponse.Feed){
+            val image = data.display.images
+            val rating = data.content.details?.rating.toString()
+            val title = data.display.displayName.toString()
+            val description = data.seo?.web?.metaTags?.description
+            val ingredient = data.content.ingredientLines?.map {
+                it.ingredient
+            }
+
+            val main = DetailDataParcelable(
+                image,
+                rating,
+                title,
+                description,
+                ingredient)
+
+            val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+                putExtra(OBJECT_PARCELABLE, main)
+            }
+            startActivity(intent)
+        }
+
         favoriteAdapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener{
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
-                val image = data.display.images
-                val rating = data.content.details?.rating.toString()
-                val title = data.display.displayName.toString()
-                val description = data.seo?.web?.metaTags?.description
-                val ingredient = data.content.ingredientLines?.map {
-                    it.ingredient
-                }
-
-                val main = DetailDataParcelable(
-                    image,
-                    rating,
-                    title,
-                    description,
-                    ingredient)
-
-                val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
-                    putExtra(OBJECT_PARCELABLE, main)
-                }
-                startActivity(intent)
+                navigateDetail(data)
             }
         })
 
         detailAdapter = DetailAdapter(object : DetailAdapter.OnClickListener{
             override fun onClickItem(data: GetFeedsListResponse.Feed) {
-                val image = data.display.images
-                val rating = data.content.details?.rating.toString()
-                val title = data.display.displayName.toString()
-                val description = data.seo?.web?.metaTags?.description
-                val ingredient = data.content.ingredientLines?.map {
-                    it.ingredient
-                }
-
-                val main = DetailDataParcelable(
-                    image,
-                    rating,
-                    title,
-                    description,
-                    ingredient)
-
-                val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
-                    putExtra(OBJECT_PARCELABLE, main)
-                }
-                startActivity(intent)
+                navigateDetail(data)
             }
         })
 

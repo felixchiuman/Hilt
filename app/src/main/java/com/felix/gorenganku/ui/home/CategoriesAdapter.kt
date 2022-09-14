@@ -49,12 +49,12 @@ class CategoriesAdapter() : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>()
                 Glide.with(binding.root).load(data.display.iconImage)
                     .into(binding.ivCategory)
                 tvTitle.text = data.display.displayName
-                categoryCard.setOnClickListener({
-                    rowIndex = position
+                categoryCard.setOnClickListener {
+                    rowIndex = layoutPosition
                     notifyDataSetChanged()
-                })
+                }
 
-                if (rowIndex === position) {
+                if (rowIndex == layoutPosition) {
                     categoryCard.setBackgroundResource(R.drawable.selected_card)
                 } else {
                     categoryCard.setBackgroundResource(R.drawable.unselected_card)
