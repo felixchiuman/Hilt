@@ -7,7 +7,7 @@ import com.felix.gorenganku.R
 import com.felix.gorenganku.databinding.ActivityDetailBinding
 import com.felix.gorenganku.ui.base.BaseActivity
 import com.felix.gorenganku.ui.home.MainActivity
-import com.felix.gorenganku.ui.home.MainParcelable
+import com.felix.gorenganku.ui.home.DetailDataParcelable
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
 
@@ -18,7 +18,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val data = intent.getParcelableExtra<MainParcelable>(MainActivity.OBJECT_PARCELABLE)
+        val data = intent.getParcelableExtra<DetailDataParcelable>(MainActivity.OBJECT_PARCELABLE)
 
         binding.apply {
             appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -68,20 +68,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             for (i in data?.ingredient?.indices!!) {
                 val chip = Chip(this)
                 chip.text = data.ingredient[i]
-                chip.isClickable = false
-                chip.isCheckable = false
-                chip.isCloseIconVisible = false
-                chip.isChipIconVisible = false
-                chip.isFocusable = false
-                chip.isFocusableInTouchMode = false
-                chip.isLongClickable = false
-                chip.isClickable = false
-                chip.isCheckable = false
-                chip.isCloseIconVisible = false
-                chip.isChipIconVisible = false
-                chip.isFocusable = false
-                chip.isFocusableInTouchMode = false
-                chip.isLongClickable = false
                 chip.isClickable = false
                 chip.isCheckable = false
                 chip.isCloseIconVisible = false

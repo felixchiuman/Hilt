@@ -1,11 +1,11 @@
 package com.felix.gorenganku.data.repository
 
-import com.felix.gorenganku.data.api.service.ApiHelper
+import com.felix.gorenganku.data.api.service.ApiService
 
-class Repository(private val apiHelper: ApiHelper) {
-    suspend fun getList() = apiHelper.getList()
+class Repository(private val apiService: ApiService) {
+    suspend fun getList() = apiService.getList()
 
-    suspend fun getListDetail() = apiHelper.getListDetail()
+    suspend fun getListDetail() = apiService.getListDetail()
 
-    suspend fun getCategories() = apiHelper.getCategories()
+    suspend fun getCategories() = apiService.getCategories()
 }

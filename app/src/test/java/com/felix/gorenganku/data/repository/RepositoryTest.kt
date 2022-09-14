@@ -2,7 +2,6 @@ package com.felix.gorenganku.data.repository
 
 import com.felix.gorenganku.data.api.model.category.GetCategoryListResponse
 import com.felix.gorenganku.data.api.model.list.GetFeedsListResponse
-import com.felix.gorenganku.data.api.service.ApiHelper
 import com.felix.gorenganku.data.api.service.ApiService
 import io.mockk.every
 import io.mockk.mockk
@@ -16,15 +15,13 @@ class RepositoryTest {
 
     //variable yg diperlukan
     private lateinit var apiService: ApiService
-    private lateinit var apiHelper: ApiHelper
     private lateinit var repository: Repository
 
     @Before
     fun setUp(){
         apiService = mockk()
-        apiHelper = mockk()
 
-        repository = Repository(apiHelper)
+        repository = Repository(apiService)
     }
 
     //sintaks nya untuk mengambil data dari apiHelper
@@ -34,7 +31,7 @@ class RepositoryTest {
 
         every{
             runBlocking {
-                apiHelper.getCategories()
+                apiService.getCategories()
             }
         } returns categoryResponse
 //system under test
@@ -42,7 +39,7 @@ class RepositoryTest {
 //then -> apakah data pada var categoryResp sudah cocok dengan helper getcategory
         verify {
             runBlocking {
-                apiHelper.getCategories()
+                apiService.getCategories()
             }
         }
     }
@@ -53,7 +50,7 @@ class RepositoryTest {
 
         every{
             runBlocking {
-                apiHelper.getList()
+                apiService.getList()
             }
         } returns getList
 
@@ -61,7 +58,7 @@ class RepositoryTest {
 
         verify {
             runBlocking {
-                apiHelper.getList()
+                apiService.getList()
             }
         }
     }
@@ -72,7 +69,7 @@ class RepositoryTest {
 
         every{
             runBlocking {
-                apiHelper.getListDetail()
+                apiService.getListDetail()
             }
         } returns getListDetail
 
@@ -80,7 +77,7 @@ class RepositoryTest {
 
         verify {
             runBlocking {
-                apiHelper.getListDetail()
+                apiService.getListDetail()
             }
         }
     }

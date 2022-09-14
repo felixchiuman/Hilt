@@ -4,7 +4,6 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.felix.gorenganku.BuildConfig
-import com.felix.gorenganku.data.api.service.ApiHelper
 import com.felix.gorenganku.data.api.service.ApiService
 import dagger.Module
 import dagger.Provides
@@ -92,11 +91,5 @@ object NetworkModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create()
-    }
-
-    @Singleton
-    @Provides
-    fun provideApiHelper(apiService: ApiService): ApiHelper {
-        return ApiHelper(apiService)
     }
 }

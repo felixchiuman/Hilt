@@ -40,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     it.ingredient
                 }
 
-                val main = MainParcelable(
+                val main = DetailDataParcelable(
                     image,
                     rating,
                     title,
@@ -64,7 +64,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     it.ingredient
                 }
 
-                val main = MainParcelable(
+                val main = DetailDataParcelable(
                     image,
                     rating,
                     title,
